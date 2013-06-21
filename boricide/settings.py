@@ -84,8 +84,6 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = '-sa03msgxlp20axy0%0=ikrv3fyv_tep@q02h-=4#ea%_sxzal'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
