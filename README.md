@@ -4,7 +4,8 @@ boricide
 requirements
 --------------
 (from ubuntu 13.04)
- - apt-get install python-django python-tastypie libapache2-mod-wsgi
+ - apt-get install python-django python-tastypie libapache2-mod-wsgi python-pip
+ - pip install django-grappelli
  - a2enmod wsgi headers
 
 WSGI set up: apache vhost example
@@ -12,7 +13,8 @@ WSGI set up: apache vhost example
     NameVirtualHost boricide
     <VirtualHost boricide>
         ServerName boricide
-        Alias /static/admin/ /var/www/boricide/static/admin/
+        Alias /static/admin/     /var/www/boricide/static/admin/
+        Alias /static/grappelli/ /var/www/boricide/static/grappelli/
     
         Header set Access-Control-Allow-Origin "*"
         Header set Access-Control-Allow-Headers "accept, authorization, origin"

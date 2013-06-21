@@ -17,4 +17,5 @@ admin.site.register(Concert)
 urlpatterns = patterns('',
     (r'^admin/',  include(admin.site.urls)),
     (r'^api/',    include(v1_api.urls)),
+    (r'^grappelli/', include('grappelli.urls')),
 )
