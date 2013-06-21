@@ -12,7 +12,7 @@ WSGI set up: apache vhost example
     NameVirtualHost boricide
     <VirtualHost boricide>
         ServerName boricide
-        Alias /static/admin/ /var/www/boricide/admin/
+        Alias /static/admin/ /var/www/boricide/static/admin/
     
         Header set Access-Control-Allow-Origin "*"
         Header set Access-Control-Allow-Headers "accept, authorization, origin"
