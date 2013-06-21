@@ -9,4 +9,4 @@ DATABASES = {
     }
 }
 
-SECRET_KEY =
+SECRET_KEY = 'change this key'
