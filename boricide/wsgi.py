@@ -14,6 +14,7 @@ framework.
 
 """
 import os
+import sys
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "boricide.settings")
 
@@ -26,3 +27,7 @@ application = get_wsgi_application()
 # Apply WSGI middleware here.
 # from helloworld.wsgi import HelloWorldApplication
 # application = HelloWorldApplication(application)
+
+path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir))
+if path not in sys.path:
+            sys.path.append(path)
