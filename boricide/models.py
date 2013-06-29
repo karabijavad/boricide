@@ -49,6 +49,11 @@ class Event(models.Model):
     advance_price = models.DecimalField(max_digits=5, decimal_places=2, blank=True)
     description = models.TextField(blank=True)
 
+    def save(self, *args, **kwargs):
+        if not self.advance_price:
+            self.advance_price = self.door_price
+        super(Event, self).save(*args, **kwargs)
+
     def __unicode__(self):
         return self.name
 
