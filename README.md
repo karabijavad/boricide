@@ -4,8 +4,7 @@ boricide
 requirements
 --------------
 (from ubuntu 13.04)
- - apt-get install python-django python-tastypie libapache2-mod-wsgi python-pip
- - pip install django-grappelli
+ - pip install django django-tastypie django-grappelli
  - a2enmod wsgi headers
 
 WSGI set up: apache vhost example
