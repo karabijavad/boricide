@@ -2,7 +2,7 @@ from tastypie.resources import ModelResource, ALL
 from tastypie import fields
 from boricide.models import Event, Artist, Venue, Concert
 from tastypie.authorization import DjangoAuthorization
-from tastypie.authentication import ApiKeyAuthentication
+from tastypie.authentication import Authentication
 
 
 class EventResource(ModelResource):
@@ -13,7 +13,7 @@ class EventResource(ModelResource):
         return bundle.obj.end_time.isoformat()
 
     class Meta:
-        authentication = ApiKeyAuthentication()
+        authentication = Authentication()
         authorization = DjangoAuthorization()
         queryset = Event.objects.all()
         resource_name = 'event'
@@ -22,7 +22,7 @@ class EventResource(ModelResource):
 
 class ArtistResource(ModelResource):
     class Meta:
-        authentication = ApiKeyAuthentication()
+        authentication = Authentication()
         authorization = DjangoAuthorization()
         queryset = Artist.objects.all()
         resource_name = 'artist'
@@ -31,7 +31,7 @@ class ArtistResource(ModelResource):
 
 class VenueResource(ModelResource):
     class Meta:
-        authentication = ApiKeyAuthentication()
+        authentication = Authentication()
         authorization = DjangoAuthorization()
         queryset = Venue.objects.all()
         resource_name = 'venue'
@@ -43,7 +43,7 @@ class ConcertResource(EventResource):
     venue = fields.ToOneField(VenueResource, 'venue', full=True)
 
     class Meta:
-        authentication = ApiKeyAuthentication()
+        authentication = Authentication()
         authorization = DjangoAuthorization()
         queryset = Concert.objects.all()
         resource_name = 'concert'
