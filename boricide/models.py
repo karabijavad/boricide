@@ -24,9 +24,7 @@ class Venue(models.Model):
 
     def save(self, *args, **kwargs):
         try:
-            coords = Geocoder.geocode(self.address).coordinates
-            self.lat = coords[0]
-            self.lng = coords[1]
+            self.lat, self.lng = Geocoder.geocode(self.address).coordinates
         except:
             return
         super(Venue, self).save(*args, **kwargs)
@@ -41,7 +39,8 @@ class Event(models.Model):
     end_time = models.DateTimeField()
     venue = models.ForeignKey(Venue)
     door_price = models.DecimalField(max_digits=5, decimal_places=2)
-    advance_price = models.DecimalField(max_digits=5, decimal_places=2, blank=True)
+    advance_price = models.DecimalField(
+        max_digits=5, decimal_places=2, blank=True)
     description = models.TextField(blank=True)
 
     def save(self, *args, **kwargs):
