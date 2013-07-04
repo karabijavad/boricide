@@ -1,9 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from tastypie.models import create_api_key
-import urllib2
-import urllib
-import json
+from pygeocoder import Geocoder
 
 models.signals.post_save.connect(create_api_key, sender=User)
 
@@ -25,11 +23,10 @@ class Venue(models.Model):
     lng = models.DecimalField(max_digits=20, decimal_places=10, blank=True)
 
     def save(self, *args, **kwargs):
-        url = 'http://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=' + urllib.quote_plus(self.address)
         try:
-            data = json.loads(urllib2.urlopen(url).read())
-            self.lat = data["results"][0]["geometry"]["location"]["lat"]
-            self.lng = data["results"][0]["geometry"]["location"]["lng"]
+            coords = Geocoder.geocode(self.address).coordinates
+            self.lat = coords[0]
+            self.lng = coords[1]
         except:
             return
         super(Venue, self).save(*args, **kwargs)
