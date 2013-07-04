@@ -31,9 +31,7 @@ class Venue(models.Model):
             self.lat = data["results"][0]["geometry"]["location"]["lat"]
             self.lng = data["results"][0]["geometry"]["location"]["lng"]
         except:
-            self.lat = 0
-            self.lng = 0
-            pass
+            return
         super(Venue, self).save(*args, **kwargs)
 
     def __unicode__(self):
