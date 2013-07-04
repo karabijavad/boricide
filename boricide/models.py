@@ -23,10 +23,14 @@ class Venue(models.Model):
     lng = models.DecimalField(max_digits=20, decimal_places=10, blank=True)
 
     def save(self, *args, **kwargs):
-        try:
-            self.lat, self.lng = Geocoder.geocode(self.address).coordinates
-        except:
-            return
+        #user didnt provide coords so...
+        if not self.lat and not self.lng:
+            try:
+                #...try geocoding the address...
+                self.lat, self.lng = Geocoder.geocode(self.address).coordinates
+            except:
+                #...address couldnt be geocoding, bail out (dont save model)
+                return
         super(Venue, self).save(*args, **kwargs)
 
     def __unicode__(self):
