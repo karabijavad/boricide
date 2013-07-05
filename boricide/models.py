@@ -55,3 +55,7 @@ class Event(models.Model):
 
 class Concert(Event):
     artists = models.ManyToManyField(Artist)
+
+
+class UserPref(models.Model):
+    user = models.OneToOneField(User)
