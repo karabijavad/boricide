@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from boricide.models import Artist, Venue, Concert
+from boricide.models import Artist, Venue, Concert, UserPref
 from tastypie.api import Api
 from boricide.api.resources import ArtistResource, VenueResource, ConcertResource
 
@@ -13,6 +13,7 @@ admin.autodiscover()
 admin.site.register(Artist)
 admin.site.register(Venue)
 admin.site.register(Concert)
+admin.site.register(UserPref)
 
 urlpatterns = patterns('',
     (r'^admin/',  include(admin.site.urls)),
