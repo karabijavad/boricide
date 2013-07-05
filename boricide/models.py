@@ -59,3 +59,8 @@ class Concert(Event):
 
 class UserPref(models.Model):
     user = models.OneToOneField(User)
+    ArtistsStarred = models.ManyToManyField(Artist, blank=True)
+    ConcertsStarred = models.ManyToManyField(Concert, blank=True)
+
+    def __unicode__(self):
+        return self.user.get_full_name()
