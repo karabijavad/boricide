@@ -7,6 +7,7 @@ models.signals.post_save.connect(create_api_key, sender=User)
 
 
 class Artist(models.Model):
+    hometown = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
     website = models.CharField(max_length=100, blank=True)
     description = models.TextField(blank=True)
