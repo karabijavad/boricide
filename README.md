@@ -3,12 +3,13 @@ boricide
 
 requirements
 --------------
-(from ubuntu 13.04)
- - pip install django django-tastypie django-grappelli requests pygeocoder
+ - in /var/www/boricide/, execute 'virtualenv .'
+ - pip install -r requirements.txt
  - a2enmod wsgi headers
 
 WSGI set up: apache vhost example
 --------------
+    WSGIPythonHome /var/www/boricide/ #since this is where virtualenv was set up
     NameVirtualHost boricide
     <VirtualHost boricide>
         ServerName boricide
