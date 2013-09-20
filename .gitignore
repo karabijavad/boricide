@@ -4,3 +4,6 @@
 local_settings.py
 static/
 initial_data.json
+bin/
+lib/
+local/
