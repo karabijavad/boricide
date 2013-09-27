@@ -1,4 +1,4 @@
-from tastypie.resources import ModelResource, ALL
+from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from tastypie import fields
 from boricide.models import Event, Artist, Venue, Concert
 from tastypie.authorization import DjangoAuthorization
@@ -27,6 +27,9 @@ class ArtistResource(ModelResource):
         queryset = Artist.objects.all()
         resource_name = 'artist'
         always_return_data = True
+	filtering = {
+		'name': ALL
+	}
 
 
 class VenueResource(ModelResource):
@@ -50,5 +53,8 @@ class ConcertResource(EventResource):
         always_return_data = True
         filtering = {
             'start_time': ALL,
-            'end_time': ALL
+            'end_time': ALL,
+	    'advance_price': ALL,
+	    'door_price': ALL,
+	    'artists': ALL_WITH_RELATIONS
         }
