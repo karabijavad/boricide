@@ -58,7 +58,8 @@ class Event(models.Model):
 
 class Concert(Event):
     artists = models.ManyToManyField(Artist)
-
+    def __unicode__(self):
+        return self.name
 
 class UserPref(models.Model):
     user = models.OneToOneField(User)
