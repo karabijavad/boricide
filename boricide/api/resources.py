@@ -24,7 +24,6 @@ class urlencodeSerializer(Serializer):
     def to_urlencode(self,content):
         pass
 
-
 class EventResource(ModelResource):
   def dehydrate_start_time(self, bundle):
     return bundle.obj.start_time.isoformat()
