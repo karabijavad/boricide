@@ -6,55 +6,58 @@ from tastypie.authentication import Authentication
 
 
 class EventResource(ModelResource):
-    def dehydrate_start_time(self, bundle):
-        return bundle.obj.start_time.isoformat()
+  def dehydrate_start_time(self, bundle):
+    return bundle.obj.start_time.isoformat()
 
-    def dehydrate_end_time(self, bundle):
-        return bundle.obj.end_time.isoformat()
+  def dehydrate_end_time(self, bundle):
+    return bundle.obj.end_time.isoformat()
 
-    class Meta:
-        authentication = Authentication()
-        authorization = DjangoAuthorization()
-        queryset = Event.objects.all()
-        resource_name = 'event'
-        always_return_data = True
+  class Meta:
+    authentication = Authentication()
+    authorization = DjangoAuthorization()
+    queryset = Event.objects.all()
+    resource_name = 'event'
+    always_return_data = True
 
 
 class ArtistResource(ModelResource):
-    class Meta:
-        authentication = Authentication()
-        authorization = DjangoAuthorization()
-        queryset = Artist.objects.all()
-        resource_name = 'artist'
-        always_return_data = True
-	filtering = {
-		'name': ALL
-	}
+  class Meta:
+    authentication = Authentication()
+    authorization = DjangoAuthorization()
+    queryset = Artist.objects.all()
+    resource_name = 'artist'
+    always_return_data = True
+    filtering = {
+      'name': ALL
+    }
 
 
 class VenueResource(ModelResource):
-    class Meta:
-        authentication = Authentication()
-        authorization = DjangoAuthorization()
-        queryset = Venue.objects.all()
-        resource_name = 'venue'
-        always_return_data = True
+  class Meta:
+    authentication = Authentication()
+    authorization = DjangoAuthorization()
+    queryset = Venue.objects.all()
+    resource_name = 'venue'
+    always_return_data = True
+    filtering = {
+      'name': ALL
+    }
 
 
 class ConcertResource(EventResource):
-    artists = fields.ToManyField(ArtistResource, 'artists', full=True)
-    venue = fields.ToOneField(VenueResource, 'venue', full=True)
+  artists = fields.ToManyField(ArtistResource, 'artists', full=True)
+  venue = fields.ToOneField(VenueResource, 'venue', full=True)
 
-    class Meta:
-        authentication = Authentication()
-        authorization = DjangoAuthorization()
-        queryset = Concert.objects.all()
-        resource_name = 'concert'
-        always_return_data = True
-        filtering = {
-            'start_time': ALL,
-            'end_time': ALL,
-	    'advance_price': ALL,
-	    'door_price': ALL,
-	    'artists': ALL_WITH_RELATIONS
-        }
+  class Meta:
+    authentication = Authentication()
+    authorization = DjangoAuthorization()
+    queryset = Concert.objects.all()
+    resource_name = 'concert'
+    always_return_data = True
+    filtering = {
+      'start_time': ALL,
+      'end_time': ALL,
+      'advance_price': ALL,
+      'door_price': ALL,
+      'artists': ALL_WITH_RELATIONS
+    }
