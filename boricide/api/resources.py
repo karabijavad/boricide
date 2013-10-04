@@ -28,7 +28,8 @@ class ArtistResource(ModelResource):
     resource_name = 'artist'
     always_return_data = True
     filtering = {
-      'name': ALL
+      'name': ALL,
+      'id': ALL
     }
 
 
