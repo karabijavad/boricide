@@ -1,3 +1,5 @@
+import urlparse
+from tastypie.serializers import Serializer
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from tastypie import fields
 from boricide.models import Event, Artist, Venue, Concert
@@ -64,7 +66,6 @@ class VenueResource(ModelResource):
     filtering = {
       'name': ALL
     }
-    allowed_methods = ["put"]
     serializer = urlencodeSerializer()
 
 
