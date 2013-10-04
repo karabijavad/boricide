@@ -64,7 +64,8 @@ class VenueResource(ModelResource):
     resource_name = 'venue'
     always_return_data = True
     filtering = {
-      'name': ALL
+      'name': ALL,
+      'id': ALL
     }
     serializer = urlencodeSerializer()
 
