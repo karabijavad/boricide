@@ -9,6 +9,7 @@ requirements
 
 WSGI set up: apache vhost example
 --------------
+
 WSGIPythonHome /home/javad/boricide/
 
 NameVirtualHost showshows.net
