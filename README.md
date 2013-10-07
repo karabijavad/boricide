@@ -9,23 +9,27 @@ requirements
 
 WSGI set up: apache vhost example
 --------------
-    WSGIPythonHome /var/www/boricide/ #since this is where virtualenv was set up
-    NameVirtualHost boricide
-    <VirtualHost boricide>
-        ServerName boricide
-        Alias /static/     /var/www/boricide/static/
-    
-        Header set Access-Control-Allow-Origin "*"
-        Header set Access-Control-Allow-Headers "accept, authorization, origin"
-    
-        WSGIPassAuthorization On
-        WSGIScriptAlias / /var/www/boricide/boricide/wsgi.py
-    </VirtualHost>
+WSGIPythonHome /home/javad/boricide/
+
+NameVirtualHost showshows.net
+<VirtualHost showshows.net>
+    ServerName showshows.net
+    ServerAlias www.showshows.net
+
+    Alias /static/     /home/javad/boricide/static/
+
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Headers "accept, authorization, origin, Content-Type"
+    Header set Access-Control-Allow-Methods "POST, PUT, PATCH, DELETE, GET"
+
+    WSGIPassAuthorization On
+    WSGIScriptAlias / /home/javad/boricide/boricide/wsgi.py
+</VirtualHost>
 
 getting it up and running
 --------------
 
- - set above vhost in apache configuration (replacing '/var/www/boricide' with project directory, and 'boricide' virtual host name as necessary)
+ - set above vhost in apache configuration (replacing '/home/javad/boricide/' with project directory, and 'boricide' virtual host name as necessary)
  - set boricide/local_settings.py accordingly
  - ./manage.py syncdb
  - ./manage.py collectstatic
