@@ -7,3 +7,8 @@ initial_data.json
 bin/
 lib/
 local/
+include
+lib-python/
+lib_pypy/
+site-packages/
+

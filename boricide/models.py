@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from tastypie.models import create_api_key
 from pygeocoder import Geocoder
+import simplejson, urllib2
 
 models.signals.post_save.connect(create_api_key, sender=User)
 
@@ -28,7 +29,8 @@ class Venue(models.Model):
             try:
                 #...try geocoding the address...
                 self.lat, self.lng = Geocoder.geocode(self.address).coordinates
-            except:
+            except Exception as e:
+                print str(e)
                 #...address couldnt be geocoding, bail out (dont save model)
                 return
         super(Venue, self).save(*args, **kwargs)
@@ -38,13 +40,13 @@ class Venue(models.Model):
 
 
 class Event(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=500)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     venue = models.ForeignKey(Venue)
-    door_price = models.DecimalField(max_digits=5, decimal_places=2)
+    door_price = models.DecimalField(max_digits=10, decimal_places=2)
     advance_price = models.DecimalField(
-        max_digits=5, decimal_places=2, blank=True)
+        max_digits=10, decimal_places=2, blank=True)
     description = models.TextField(blank=True)
 
     def save(self, *args, **kwargs):
