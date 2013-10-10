@@ -65,7 +65,9 @@ class VenueResource(ModelResource):
     always_return_data = True
     filtering = {
       'name': ALL,
-      'id': ALL
+      'id': ALL,
+      'lat': ALL,
+      'lng': ALL
     }
     serializer = urlencodeSerializer()
 
@@ -85,6 +87,7 @@ class ConcertResource(EventResource):
       'end_time': ALL,
       'advance_price': ALL,
       'door_price': ALL,
-      'artists': ALL_WITH_RELATIONS
+      'artists': ALL_WITH_RELATIONS,
+      'venue': ALL_WITH_RELATIONS
     }
     serializer = urlencodeSerializer()
