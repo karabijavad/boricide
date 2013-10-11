@@ -36,7 +36,7 @@ class EventResource(ModelResource):
   class Meta:
     authentication = ApiKeyAuthentication()
     authorization = DjangoAuthorization()
-    queryset = Event.objects.all()
+    queryset = Event.objects.select_related('venue')
     resource_name = 'event'
     always_return_data = True
     serializer = urlencodeSerializer()
@@ -79,7 +79,7 @@ class ConcertResource(EventResource):
   class Meta:
     authentication = ApiKeyAuthentication()
     authorization = DjangoAuthorization()
-    queryset = Concert.objects.all()
+    queryset = Concert.objects.select_related('venue').prefetch_related('artists')
     resource_name = 'concert'
     always_return_data = True
     filtering = {
