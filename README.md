@@ -28,7 +28,7 @@ NameVirtualHost showshows.net
 </VirtualHost>
 
 getting it up and running
---------------
+---------------
 
  - set above vhost in apache configuration (replacing '/home/javad/boricide/' with project directory, and 'boricide' virtual host name as necessary)
  - set boricide/local_settings.py accordingly
