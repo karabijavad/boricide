@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.db.utils import IntegrityError
 import urllib2
-import simplejson
+import json
 from boricide.models import *
 import datetime
 import dateutil
@@ -20,14 +20,14 @@ class Command(BaseCommand):
       while True:
         print "on page " + str(self.pageNum)
         this_page = self.data_url + "&pageNum=" + str(self.pageNum) + "&maxResults=" + str(self.maxResults)
-        data = simplejson.loads(urllib2.urlopen(this_page).read())
+        data = json.loads(urllib2.urlopen(this_page).read())
         if self.pageNum > data["totalPages"]:
           print "hit last page, stopping"
           break
 
-        events = data["events"]
-        for event in events:
+        for event in data["events"]:
           if not event["endDate"]:
+            endDate = timezone(event["org"]["timeZone"]).localize(dateutil.parser.parse(event["startDate"]))
             print "No end date, skipping show: " + event["name"]
             continue
           if event["ticketPrice"] == "FREE" or "No cover":
